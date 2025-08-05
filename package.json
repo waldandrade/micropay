@@ -1,0 +1,12 @@
+{
+  "name": "micropay",
+  "engines": {
+    "node": ">=22.0.0" 
+  },
+  "scripts": {
+    "dev": "node --experimental-transform-types server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0"
+  }
+}
