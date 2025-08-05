@@ -25,3 +25,44 @@ npm run dev
 # or
 yarn dev
 ```
+## VSCODE DEBUG
+1. Create configuration file launch.json
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "tsx",
+            "type": "node",
+            "request": "launch",
+            "program": "${file}",
+            "runtimeExecutable": "tsx", 
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen", 
+            "skipFiles": [ 
+                "<node_internals>/**", 
+                "${workspaceFolder}/node_modules/**"
+            ]
+        },
+        {
+            "name": "Attach to process",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/node_modules/**",
+            ],
+        }
+    ]
+}
+```
+
+2. Run with debug
+
+```bash
+npm run debug
+#or
+yarn debug
+```
