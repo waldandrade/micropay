@@ -1,7 +1,8 @@
-import { createServer } from 'node:http';
 import express from 'express';
 import cors from 'cors';
-import { authMiddleware } from './middleware';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile  from './swagger-output.json';
+import authRoutes from './routes';
 
 const app = express();
 app.use(
@@ -10,9 +11,8 @@ app.use(
   })
 )
 app.use(express.json());
-app.post('/auth/login', authMiddleware, async (req, res) => {
-  return res.json({ data: 'Sucesso' });
-});
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use(authRoutes);
 
 const port = Number(process.env.PORT);
 app.listen(port, () => {
