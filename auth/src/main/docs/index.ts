@@ -1,7 +1,4 @@
-import swaggerAutogen from 'swagger-autogen';
-const swaggetOpenApi = swaggerAutogen({ openapi: '3.0.0' });
-
-const doc = {
+export default {
     info: {
         version: "1.0.0",
         title: "My API",
@@ -9,11 +6,10 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:3000/api'
+            url: '/api',
+            description: 'Auth server'
         }
     ],
-  host: '',  
-    basePath: '/api',
     components: {
         schemas: {
             someBody: {
@@ -52,8 +48,3 @@ const doc = {
         }
     }
 };
-
-const outputFile = './swagger-output.json';
-const endpointsFiles = ['./routes.ts'];
-
-swaggetOpenApi(outputFile, endpointsFiles, doc);

@@ -1,12 +1,12 @@
 {
-  "name": "micropay",
+  "name": "micropay-auth",
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "tsx watch --env-file=.env server.ts",
-    "debug": "tsx watch --env-file=.env --inspect-brk ./server.ts",
-    "swagger": "tsx --env-file=.env swagger.js"
+    "dev": "tsx watch --env-file=.env ./src/server.ts",
+    "debug": "tsx watch --env-file=.env --inspect-brk ./src/server.ts",
+    "swagger": "tsx --env-file=.env ./src/configs/swagger.ts"
   },
   "devDependencies": {
     "@types/node": "^22.11.0",
@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
     "swagger-ui-express": "^5.0.1"
   }
 }
