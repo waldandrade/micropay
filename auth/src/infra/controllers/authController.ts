@@ -22,8 +22,8 @@ export class AuthController {
     const usecase = new AuthenticateUser(authProvider);
 
     try {
-      const user = await usecase.execute(data.credentials);
-      return res.json({ user });
+      const { token } = await usecase.execute(data.credentials);
+      return res.json({ token });
     } catch (err: any) {
       return res.status(401).json({ message: err.message });
     }
