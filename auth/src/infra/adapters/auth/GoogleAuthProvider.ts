@@ -6,7 +6,7 @@ class MockedOAuth2Client {
       return null;
     }
     return {
-      sub: '12345',
+      id: '12345',
       email: 'valid@user.net',
       username: 'john.doe',
       name: 'Valid user',
@@ -26,7 +26,7 @@ export class GoogleAuthProvider implements AuthProvider {
     }
 
     return {
-      id: payload.sub!,
+      id: payload.id!,
       email: payload.email,
       username: payload.username,
       name: payload.name || '',

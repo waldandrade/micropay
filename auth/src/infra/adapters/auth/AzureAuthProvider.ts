@@ -37,7 +37,7 @@ export class AzureAuthProvider implements AuthProvider {
     }
 
     return {
-      id: payload.sub!,
+      id: payload.id!,
       email: payload.email,
       username: payload.username,
       name: payload.name || '',
