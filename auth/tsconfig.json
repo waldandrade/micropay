@@ -1,15 +1,17 @@
 {
 	"compilerOptions": {
-		"moduleDetection": "force",
-		"module": "Preserve",
+    "target": "ES2020",
+		"module": "CommonJS",
 		"resolveJsonModule": true,
 		"allowJs": true,
+    "outDir": "dist",
+    "rootDirs": ["src", "tests"],
 		"esModuleInterop": true,
-		"isolatedModules": true,
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["*", "src/*"]
-    }
+		"baseUrl": "src",
+		"paths": {
+			"@/*": ["*"]
+    },
+    "skipLibCheck": true
 	},
   "include": ["src", "tests"],
   "exclude": []

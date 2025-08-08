@@ -3,7 +3,7 @@ import redis from '@/configs/redis';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const publicRoutes = ['/api/auth/login', '/api/auth/register'];
+const publicRoutes = ['/api/auth/login', '/api/v1/auth/register'];
 
 export const verifyToken = (
   req: Request,
@@ -32,8 +32,8 @@ export const verifyToken = (
       return res.status(401).json({ message: 'unauthorized' });
     }
 
-    req.userId = decoded.id;
-    req.token = token;
+    (req as any).userId = decoded.id;
+    (req as any).token = token;
 
     return next();
   });

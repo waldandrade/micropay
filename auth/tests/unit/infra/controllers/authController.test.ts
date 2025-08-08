@@ -1,6 +1,7 @@
 import { AuthController } from "@/infra/controllers/authController";
+import { Request, Response } from "express";
 
-class Response {
+class MockResponse {
   responseStatus: number = 200;
   responseData: any;
 
@@ -33,20 +34,20 @@ jest.mock('@/domain/usecases/authenticateUser', () => {
 describe('Auth Controller', () => {
   it('Should return 400 when provider is invalid', async () => {
     const controller = new AuthController();
-    const response = new Response();
-    await controller.login({ body: {}}, response);
+    const response = new MockResponse();
+    await controller.login({ body: {}} as Request, response as unknown as Response);
     expect(response.responseStatus).toBe(400);
   });
 
   it('Should return token from GoogleAuth', async () => {
     const controller = new AuthController();
-    const response = new Response();
+    const response = new MockResponse();
     await controller.login({ body: {
       provider: 'google',
       credentials: {
         token: 'google_valid_token_123',
       }
-    }}, response);
+    }} as Request, response as unknown as Response);
     expect(response.responseStatus).toBe(200);
     expect(response.responseData.token).toEqual('valid_token');
     expect(response.responseData.provider).toEqual('google');
@@ -54,14 +55,14 @@ describe('Auth Controller', () => {
 
   it('Should return token from AzureAuth', async () => {
     const controller = new AuthController();
-    const response = new Response();
+    const response = new MockResponse();
     await controller.login({ body: {
       provider: 'azure',
       credentials: {
         username: 'admin',
         password: 'Admin@123',
       }
-    }}, response);
+    }} as Request, response as unknown as Response);
     expect(response.responseStatus).toBe(200);
     expect(response.responseData.token).toEqual('valid_token');
     expect(response.responseData.provider).toEqual('azure');
