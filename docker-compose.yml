@@ -1,6 +1,19 @@
 name: vbank
 
 services:
+  api:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    restart: always
+    networks:
+      - micropay-net
+
   integration-db:
     image: bitnami/postgresql:17.4.0
     container_name: integration-db
@@ -13,7 +26,7 @@ services:
     volumes:
       - integration_db_data:/var/lib/postgresql/data  
     networks:
-      - monitoring_network
+      - micropay-net
 
   redis:
     image: redis:7
@@ -26,7 +39,7 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - monitoring_network
+      - micropay-ney
 
   kafka:
     image: bitnami/kafka:3.9.0
@@ -43,7 +56,7 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_KRAFT_CLUSTER_ID=CLUSTER_ID_1
     networks:
-      - monitoring_network
+      - micropay-ney
 
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
@@ -56,14 +69,14 @@ services:
     depends_on:
       - kafka
     networks:
-      - monitoring_network
+      - micropay-ney
 
   prometheus:
     image: prom/prometheus:v3.5.0
     ports:
       - 9090:9090
     networks:
-      - monitoring_network
+      - micropay-ney
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml # Mount the Prometheus config file
       - prometheus_data:/prometheus
@@ -78,7 +91,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - monitoring_network
+      - micropay-ney
 
 volumes:
   redis_data:
@@ -86,5 +99,5 @@ volumes:
   prometheus_data:
 
 networks:
-  monitoring_network:
+  micropay-ney:
     driver: bridge

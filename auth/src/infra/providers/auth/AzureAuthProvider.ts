@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from "@/main/errors";
 import { AuthProvider, AuthResult } from "@/main/ports/AuthProvider";
 
 
@@ -33,7 +34,7 @@ export class AzureAuthProvider implements AuthProvider {
     const { username, password } = credentials;
     const payload = await this.client.verifyIdToken(username, password);
     if (!payload) {
-      throw new Error("Invalid username or passowrd");
+      throw new InvalidCredentialsError("Invalid username or passowrd");
     }
 
     return {

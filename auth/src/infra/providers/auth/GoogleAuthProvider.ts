@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from '@/main/errors';
 import { AuthProvider, AuthResult } from '@/main/ports/AuthProvider';
 
 class MockedOAuth2Client {
@@ -22,7 +23,7 @@ export class GoogleAuthProvider implements AuthProvider {
 
     const payload = await this.client.verifyIdToken(credentials.token);
     if (!payload) {
-      throw new Error("Invalid Google token");
+      throw new InvalidCredentialsError("Invalid Google token");
     }
 
     return {
