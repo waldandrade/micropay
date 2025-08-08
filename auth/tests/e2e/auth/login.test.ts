@@ -38,5 +38,6 @@ describe('Login tests', () => {
     await RedisClient.closeConnection();
     server.close();
     jest.useRealTimers();
+    jest.clearAllMocks();
   })
 });

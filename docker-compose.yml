@@ -1,17 +1,18 @@
 name: vbank
 
 services:
-  auth-db:
-    image: bitnami/postgresql:17.4.0
-    container_name: auth-db
-    environment:
-      POSTGRESQL_USERNAME: admin
-      POSTGRESQL_PASSWORD: password
-      POSTGRES_DB: auth
+  api:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
-    volumes:
-      - auth_db_data:/var/lib/postgresql/data
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    restart: always
+    networks:
+      - micropay-net
 
   integration-db:
     image: bitnami/postgresql:17.4.0
@@ -23,7 +24,9 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - integration_db_data:/var/lib/postgresql/data
+      - integration_db_data:/var/lib/postgresql/data  
+    networks:
+      - micropay-net
 
   redis:
     image: redis:7
@@ -35,6 +38,8 @@ services:
       - "8001:8001"
     volumes:
       - redis_data:/data
+    networks:
+      - micropay-ney
 
   kafka:
     image: bitnami/kafka:3.9.0
@@ -50,6 +55,8 @@ services:
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_KRAFT_CLUSTER_ID=CLUSTER_ID_1
+    networks:
+      - micropay-ney
 
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
@@ -61,8 +68,36 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
     depends_on:
       - kafka
+    networks:
+      - micropay-ney
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    ports:
+      - 9090:9090
+    networks:
+      - micropay-ney
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # Mount the Prometheus config file
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml' # Specify the config file path
+      - '--storage.tsdb.path=/prometheus' # Specify the data storage path
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    
+  grafana:
+    image: grafana/grafana:12.1.0
+    ports:
+      - 3000:3000
+    networks:
+      - micropay-ney
 
 volumes:
   redis_data:
-  auth_db_data:
   integration_db_data:
+  prometheus_data:
+
+networks:
+  micropay-ney:
+    driver: bridge

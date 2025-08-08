@@ -1,4 +1,4 @@
-import { AzureAuthProvider } from "@/infra/adapters/auth/AzureAuthProvider";
+import { AzureAuthProvider } from "@/infra/providers/auth/AzureAuthProvider";
 import { AuthResult } from "@/main/ports/AuthProvider";
 
 describe('Azure Username & Password Auth', () => {

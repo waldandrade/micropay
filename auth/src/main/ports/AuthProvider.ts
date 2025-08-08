@@ -9,4 +9,5 @@ export interface AuthResult {
   username: string;
   token?: string;
   isAdmin: boolean;
+  provider: string;
 }

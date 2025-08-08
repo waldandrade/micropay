@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from "@/infra/adapters/auth/GoogleAuthProvider";
+import { GoogleAuthProvider } from "@/infra/providers/auth/GoogleAuthProvider";
 import { AuthResult } from "@/main/ports/AuthProvider";
 
 describe('Google Token Auth', () => {
