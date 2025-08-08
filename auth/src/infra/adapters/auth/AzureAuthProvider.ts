@@ -41,7 +41,8 @@ export class AzureAuthProvider implements AuthProvider {
       email: payload.email,
       username: payload.username,
       name: payload.name || '',
-      isAdmin: payload.isAdmin
+      isAdmin: payload.isAdmin,
+      provider: 'azure'
     };
   }
 }

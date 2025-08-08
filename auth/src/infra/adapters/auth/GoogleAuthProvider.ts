@@ -31,6 +31,7 @@ export class GoogleAuthProvider implements AuthProvider {
       username: payload.username,
       name: payload.name || '',
       isAdmin: payload.isAdmin,
+      provider: 'google'
     };
   }
 }

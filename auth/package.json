@@ -7,7 +7,7 @@
     "dev": "tsx watch --env-file=.env ./src/server.ts",
     "debug": "tsx watch --env-file=.env --inspect-brk ./src/server.ts",
     "swagger": "tsx --env-file=.env ./src/configs/swagger.ts",
-    "test": "jest --detectOpenHandles --no-cache"
+    "test": "jest --coverage --no-cache"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",

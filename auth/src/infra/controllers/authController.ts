@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { GoogleAuthProvider } from '../adapters/auth/GoogleAuthProvider';
-import { AzureAuthProvider } from '../adapters/auth/AzureAuthProvider';
 import { AuthenticateUser } from '@/domain/usecases/authenticateUser';
+import { GoogleAuthProvider } from '@/infra/adapters/auth/GoogleAuthProvider';
+import { AzureAuthProvider } from '@/infra/adapters/auth/AzureAuthProvider';
 
 export class AuthController {
   async login(req: Request, res: Response): Promise<any> {
@@ -22,8 +22,8 @@ export class AuthController {
     const usecase = new AuthenticateUser(authProvider);
 
     try {
-      const { token } = await usecase.execute(data.credentials);
-      return res.json({ token });
+      const { token, provider } = await usecase.execute(data.credentials);
+      return res.json({ token, provider });
     } catch (err: any) {
       return res.status(401).json({ message: err.message });
     }
