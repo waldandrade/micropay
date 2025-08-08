@@ -6,7 +6,6 @@ import { AuthenticateUser } from '@/domain/usecases/authenticateUser';
 export class AuthController {
   async login(req: Request, res: Response): Promise<any> {
     const data = req.body;
-    console.log(data, data.provider);
     
     let authProvider;
     switch (data.provider) {

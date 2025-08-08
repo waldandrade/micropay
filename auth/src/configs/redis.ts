@@ -1,6 +1,7 @@
 import Redis from 'ioredis';
 import { config } from '.';
 import logger from './logger';
+
 class RedisClient {
   private static instance: Redis;
   private static isConnected = false;

@@ -31,7 +31,6 @@ export class AzureAuthProvider implements AuthProvider {
   private client = new MockedUserPasswordClient();
   async authenticate(credentials: { username: string; password: string }): Promise<AuthResult> {
     const { username, password } = credentials;
-
     const payload = await this.client.verifyIdToken(username, password);
     if (!payload) {
       throw new Error("Invalid username or passowrd");
