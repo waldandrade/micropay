@@ -8,8 +8,7 @@
 		"isolatedModules": true,
     "baseUrl": "src",
     "paths": {
-      "@/tests/*": ["../tests/*"],
-      "@/*": ["*"]
+      "@/*": ["*", "src/*"]
     }
 	},
   "include": ["src", "tests"],
