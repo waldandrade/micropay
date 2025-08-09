@@ -10,6 +10,9 @@ RUN npm install --only=production
 # Copia os arquivos da aplicação
 COPY . .
 
+# Generate swagger-output.json
+RUN npm run swagger
+
 # Compila o TypeScript (se aplicável)
 RUN npm run build
 
@@ -36,4 +39,4 @@ USER appuser
 EXPOSE 3000
 
 # Comando de inicialização
-CMD ["node", "dist/index.js"]
+CMD ["npm", "start"]

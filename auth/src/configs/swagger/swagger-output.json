@@ -7,16 +7,17 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "/api",
+      "description": "Auth server"
     }
   ],
   "paths": {
-    "/api/auth/login": {
+    "/auth/login": {
       "post": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
