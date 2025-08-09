@@ -3,14 +3,14 @@ import redis from '@/configs/redis';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const publicRoutes = ['/api/auth/login', '/api/v1/auth/register'];
+const publicRoutes = ['/api/auth/login', '/api/v1/auth/register', '/docs', '/metrics'];
 
 export const verifyToken = (
   req: Request,
   res: Response,
   next: NextFunction,
 ): any => {
-  if (publicRoutes.includes(req.path)) {
+  if (publicRoutes.find(publicRoute => req.path.startsWith(publicRoute))) {
     return next();
   }
 

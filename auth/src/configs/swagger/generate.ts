@@ -3,6 +3,6 @@ import swaggerAutogen from 'swagger-autogen';
 const swaggetOpenApi = swaggerAutogen({ openapi: '3.0.0' });
 
 const outputFile = './swagger-output.json';
-const endpointsFiles = ['./routes.ts'];
+const endpointsFiles = ['../../main/routes/authRoutes.ts'];
 
 swaggetOpenApi(outputFile, endpointsFiles, swaggerConfig);
