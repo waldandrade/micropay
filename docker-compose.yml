@@ -93,12 +93,12 @@ services:
     extra_hosts:
         - "host.docker.internal:host-gateway"
     
-  # grafana:
-  #   image: grafana/grafana:12.1.0
-  #   ports:
-  #     - 3001:3000
-  #   networks:
-  #     - micropay-net
+  grafana:
+    image: grafana/grafana:12.1.0
+    ports:
+      - 3001:3000
+    networks:
+      - micropay-net
 
 volumes:
   redis_data:
