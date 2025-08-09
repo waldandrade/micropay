@@ -66,3 +66,8 @@ npm run debug
 #or
 yarn debug
 ```
+
+3. Grafana
+- Go to grafana on localhost:3001
+- Go to Connections -> DataSources and add prometeus:9090 as datasource
+- Go to Dashboard -> New -> Import and type 
