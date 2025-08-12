@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { PaymentDTO } from '@/types';
 import { PaymentService } from '@/app/services/PaymentService';
 
-export class IntegrationController {
+export class PaymentController {
   constructor(private readonly service: PaymentService) {}
 
   async sendPaymentData (req: Request, res: Response): Promise<void> {

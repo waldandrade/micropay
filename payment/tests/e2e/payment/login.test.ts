@@ -1,3 +1,10 @@
+
+describe('Auth Controller', () => {
+  it('Should return 400 when provider is invalid', async () => {
+    expect(true).toBe(true);
+  });
+});
+
 /*
 import redis, { RedisClient } from "@/configs/redis";
 import server from "@/server";

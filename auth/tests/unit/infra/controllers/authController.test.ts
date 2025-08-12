@@ -35,8 +35,21 @@ describe('Auth Controller', () => {
   it('Should return 400 when provider is invalid', async () => {
     const controller = new AuthController();
     const response = new MockResponse();
-    await controller.login({ body: {}} as Request, response as unknown as Response);
+    await controller.login({ body: { provider: 'unreal-provider'}} as Request, response as unknown as Response);
     expect(response.responseStatus).toBe(400);
+  });
+
+  it('Should return 403 when credentials are wrong', async () => {
+    const controller = new AuthController();
+    const response = new MockResponse();
+    await controller.login({ body: {
+      provider: 'azure',
+      credentials: {
+        username: 'admin',
+        password: 'Admin@1234',
+      }
+    }} as Request, response as unknown as Response);
+    expect(response.responseStatus).toBe(403);
   });
 
   it('Should return token from GoogleAuth', async () => {

@@ -1,6 +1,6 @@
 import { PaymentService } from '@/app/services/PaymentService';
 import { LegacySystemSoapAdapter } from '@/infra/adapters/LegacySystemSoapAdapter';
-import { IntegrationController } from '@/infra/controllers/IntegrationController';
+import { PaymentController } from '@/infra/controllers/paymentController';
 import { InMemoryIdempotencyStore } from '@/infra/persistence/idempotency/InMemoryIdempotencyStore';
 import { Router } from 'express';
 
@@ -10,7 +10,7 @@ export default (router: Router): void => {
   const idempStore = new InMemoryIdempotencyStore();
   
   router.post('/payment', async (req, res) => {
-    const controller = new IntegrationController(new PaymentService(idempStore, legacySystem));
+    const controller = new PaymentController(new PaymentService(idempStore, legacySystem));
     return controller.sendPaymentData(req, res);
   });
 }

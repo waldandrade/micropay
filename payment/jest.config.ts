@@ -6,10 +6,12 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   verbose: false,
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   modulePathIgnorePatterns: [
     '<rootDir>/dist/',
   ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1'
+  },
   modulePaths: [
     '<rootDir>/'
   ],

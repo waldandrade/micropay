@@ -3,7 +3,7 @@ import redis from '@/configs/redis';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const publicRoutes = ['/api/auth/login', '/api/v1/auth/register', '/docs', '/metrics'];
+const publicRoutes = ['/docs', '/metrics'];
 
 export const verifyToken = (
   req: Request,

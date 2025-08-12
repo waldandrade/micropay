@@ -18,7 +18,7 @@ export class AuthController {
         return res.status(400).json({ message: 'Invalid provider' });
       } else if (err instanceof InvalidCredentialsError) {
         logger.error(`Invalid credentials.`, err);
-        return res.status(401).json({ message: err.message });
+        return res.status(403).json({ message: err.message });
       } else {
         logger.error("Unknown Error:", err);
         return res.status(500).json({ message: 'Unknown Error' });
