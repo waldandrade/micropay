@@ -5,6 +5,7 @@ import { InvalidProviderError } from "@/main/errors";
 
 export class AuthProviderFactory {
   static create(provider: string): AuthProvider {
+    provider = provider?.toLowerCase() ?? ''
     switch (provider.toLowerCase()) {
       case 'google':
         return new GoogleAuthProvider();
